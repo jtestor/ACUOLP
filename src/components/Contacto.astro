@@ -1,0 +1,96 @@
+---
+import ContentSection from "~/components/content-section.astro";
+const web3FormsAccessKey = import.meta.env.WEB3FORMS_ACCESS_KEY;
+--- 
+
+<ContentSection 
+  title="" 
+  id="contacto" 
+  customClass="p-8 sm:p-12 md:p-24 mb-24"
+  style="background-color: black;" 
+>
+  <!-- Contenedor del formulario -->
+  <div class="flex flex-col items-center justify-center w-full max-w-3xl mx-auto gap-6 text-white">
+    
+    <!-- Título del formulario -->
+    <div class="text-center mb-6">
+      <h2 class="text-3xl sm:text-4xl font-bold tracking-wide">¡Contáctanos!</h2>
+      <p class="text-gray-400 mt-2 text-sm sm:text-base">Déjanos tu correo y te contactaremos a la brevedad</p>
+    </div>
+
+    <!-- Input y botón -->
+    <form method="POST" id="form">
+      <div class="w-full flex flex-col sm:flex-row items-center justify-center gap-4">
+        <!-- Hidden access key for Web3Forms -->
+        <input type="hidden" name="access_key"  value={web3FormsAccessKey}>
+
+        <!-- Email input with name="email" -->
+        <input 
+          type="email" 
+          name="email"
+          placeholder="Ingresa tu correo electrónico" 
+          class="w-full sm:w-3/4 p-3 rounded-md border border-gray-300 bg-transparent text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
+          required
+        />
+        
+        <!-- Submit button -->
+        <button 
+          type="submit" 
+          class="w-full sm:w-auto bg-teal-500 text-white font-bold py-3 px-8 rounded-md hover:bg-teal-400 hover:text-black transition duration-300 ease-in-out">
+          Enviar
+        </button>
+      </div>
+    </form>
+
+    <!-- Feedback/result message area -->
+    <div id="result" class="mt-4 text-white"></div>
+  </div>
+</ContentSection>
+
+<script is:inline>
+  const form = document.getElementById('form');
+  const result = document.getElementById('result');
+
+  form.addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent the default form submission
+
+      const formData = new FormData(form); // Collect form data
+      const object = Object.fromEntries(formData); // Convert form data to an object
+      const json = JSON.stringify(object); // Convert object to JSON
+
+      // Display a "Please wait..." message while the request is in progress
+      result.innerHTML = "Espere...";
+
+      // Make the fetch request to Web3Forms API
+      fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+          },
+          body: json // Send the form data as JSON
+      })
+      .then(async (response) => {
+          let json = await response.json(); // Parse the JSON response
+          if (response.status == 200) {
+              // Display success message from the response
+              result.innerHTML = "Te contactaremos en la brevedad!";
+          } else {
+              console.log(response); // Log any errors to the console
+              result.innerHTML = json.message; // Display error message
+          }
+      })
+      .catch(error => {
+          console.log(error); // Log any exceptions to the console
+          result.innerHTML = "Error"; // Display a generic error message
+      })
+      .then(() => {
+          // Reset the form after submission
+          form.reset();
+          // Hide the result message after 3 seconds
+          setTimeout(() => {
+              result.style.display = "none";
+          }, 3000);
+      });
+  });
+</script>

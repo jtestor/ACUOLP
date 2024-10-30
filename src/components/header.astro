@@ -1,0 +1,163 @@
+---
+import ThemeSwitcher from "~/components/theme-switcher.astro";
+import type { NavItem } from "~/types";
+import { Icon } from "astro-icon/components";
+import { RiMenu2Fill } from "react-icons/ri";
+
+const navItems: Array<NavItem> = [
+  { title: "Que es ACUO", url: "#QueEs" },
+  { title: "Beneficios", url: "#Beneficios" },
+  { title: "Contacto", url: "#contacto" },
+];
+const headerImage = "/assets/ACUOBLANCO.png";
+---
+
+<header
+  id="page-header"
+  class="absolute bottom-0 z-20 flex w-full items-center justify-between px-8 py-4 text-white transition-all duration-300"
+>
+  <!-- Botón de menú hamburguesa siempre visible a la izquierda -->
+  <button
+    id="open-nav-button"
+    type="button"
+    class="mr-auto flex items-center"
+    aria-label="Navigation"
+  >
+    <RiMenu2Fill class="text-white" size={48} />
+  </button>
+
+  <!-- Logo centrado, inicialmente oculto -->
+  <a class="logo hidden flex items-center gap-3 justify-center absolute left-1/2 transform -translate-x-1/2" href="#">
+    <img src={headerImage} alt="ACUO Logo" class="h-10 w-auto" />
+  </a>
+
+  <!-- Links de navegación a la derecha, visibles solo en desktop -->
+  <nav class="hidden sm:flex ml-auto">
+    <ul class="flex items-center gap-6">
+      {navItems.map(({ title, url }) => (
+        <li>
+          <a class="text-sm" href={url}>{title}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <!-- Theme Switcher -->
+  <ThemeSwitcher />
+
+  <!-- Modal de menú / Sidebar -->
+  <div id="menu-modal" class="modal hidden" aria-hidden="true">
+    <div class="fixed inset-0 bg-black text-white sm:flex sm:w-64 sm:bg-gray-900 sm:bg-opacity-100 sm:justify-center sm:p-6">
+      <div class="sm:hidden flex flex-col items-center justify-center w-full h-full">
+        <!-- Contenido para dispositivos móviles: solo muestra los enlaces actuales -->
+        <button
+          id="close-nav-button"
+          type="button"
+          aria-label="Close navigation"
+          class="absolute top-4 right-4"
+        >
+          <Icon name="mdi:close" class="size-8 text-white" />
+        </button>
+        <img src={headerImage} alt="ACUO Logo" class="h-10 mb-8" />
+        <nav>
+          <ul class="space-y-6 text-lg">
+            {navItems.map(({ title, url }) => (
+              <li>
+                <a class="modal-link" href={url}>{title}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Sidebar content para escritorio -->
+      <div class="hidden sm:flex flex-col space-y-4">
+        <header class="flex justify-between items-center mb-4">
+          <img src={headerImage} alt="ACUO Logo" class="h-8 w-auto" />
+          <button
+            id="close-nav-button"
+            type="button"
+            aria-label="Close navigation"
+          >
+            <Icon name="mdi:close" class="size-8 text-white" />
+          </button>
+        </header>
+        <nav>
+          <ul class="space-y-4">
+            <!-- Links deshabilitados para la versión de escritorio -->
+            <li class="text-gray-400 cursor-not-allowed">Accede al Dashboard</li>
+            <li class="text-gray-400 cursor-not-allowed">Quienes somos</li>
+            <li class="text-gray-400 cursor-not-allowed">Servicios y precios</li>
+            <li class="text-gray-400 cursor-not-allowed">Preguntas frecuentes</li>
+            <li class="text-gray-400 cursor-not-allowed">Términos y condiciones</li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  import MicroModal from "micromodal";
+  import invariant from "tiny-invariant";
+
+  const menuModalId = "menu-modal";
+  const header = document.querySelector("#page-header") as HTMLElement;
+  const logo = document.querySelector(".logo") as HTMLElement;
+  const page = document.documentElement;
+  const openNavButton = document.querySelector("#open-nav-button");
+  const closeNavButtons = document.querySelectorAll("#close-nav-button");
+  const mobileLinks = document.querySelectorAll(".modal-link");
+
+  invariant(header, "header should not be null");
+  invariant(logo, "logo should not be null");
+  invariant(openNavButton, "openNavButton should not be null");
+
+  const openMenu = () => {
+    MicroModal.show(menuModalId, { disableScroll: true });
+  };
+
+  const closeMenu = () => {
+    MicroModal.close(menuModalId);
+  };
+
+  openNavButton.addEventListener("click", openMenu);
+  closeNavButtons.forEach((button) => {
+    button.addEventListener("click", closeMenu);
+  });
+
+  // Cerrar el menú modal al hacer clic en los enlaces de la vista móvil
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  document.addEventListener("scroll", () => {
+    const d = page.clientHeight - window.scrollY - header.offsetHeight;
+
+    if (d < 0) {
+      header.classList.add("bg-black", "fixed-header");
+      logo.classList.remove("hidden");
+    } else {
+      header.classList.remove("bg-black", "fixed-header");
+      logo.classList.add("hidden");
+    }
+  });
+</script>
+
+<noscript>
+  <style>
+    #open-nav-button {
+      display: none;
+    }
+  </style>
+</noscript>
+
+<style>
+  .fixed-header {
+    @apply fixed bottom-auto top-0;
+    @apply border-default bg-default text-default;
+  }
+  .modal.is-open {
+    @apply block;
+  }
+</style>

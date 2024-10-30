@@ -1,0 +1,31 @@
+---
+import { HiArrowCircleDown } from "react-icons/hi";
+import { Icon } from "astro-icon/components";
+
+// Ya no necesitas importar las imágenes desde "src"
+const widths = [450, 800];
+const sizes = "(min-width: 640px) 42vw, 67vw";
+---
+
+<section class="h-full w-full place-content-center bg-white" id="splash">
+  <div class="flex flex-row items-center place-content-center">
+    <div id="splash-bg-fallback" class="absolute inset-0 hidden opacity-40"></div>
+    <div class="relative items-center h-full sm:grid-cols-2">
+      <h2 class="flex flex-col items-center gap-2 self-end sm:gap-4 sm:self-auto sm:justify-self-end">
+        <!-- Cambia la ruta de las imágenes -->
+        <img src="/assets/ACUOLogo.jpg" alt="ACUO Logo" />
+        <div class="text-center tracking-tighter text-md md:text-xl text-black">
+          Tecnología SMART para el agricultor <span class="font-bold">chileno</span>
+        </div>
+      </h2>
+    </div>
+  </div>
+</section>
+
+<noscript>
+  <style>
+    #splash-bg-fallback {
+      display: block;
+    }
+  </style>
+</noscript>

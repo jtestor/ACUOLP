@@ -1,0 +1,27 @@
+---
+import ContentSection from "~/components/content-section.astro";
+
+// Cambia la ruta para apuntar a la imagen en la carpeta "public/assets"
+const background = "/assets/Estaca.jpg";
+---
+
+<ContentSection 
+  id="intro" 
+  title=""
+  customClass="h-screen md:h-[100vh] bg-cover bg-center md:bg-center bg-no-repeat grid grid-cols-1 inset-y-0 p-4 md:p-24" 
+  style={`background-image: url(${background});`}
+  overlayOpacity="0.3"
+>
+  <div class="relative mt-24 md:mt-36">
+    <div class="relative flex flex-col font-bold text-xl md:text-3xl content-center items-center md:items-start gap-6 text-white z-10 text-center md:text-left">
+      <h1 class="leading-tight">ACUO es una herramienta <br><span class="text-blue-400">IOT</span> para el<br>control y gestión<br> de variables agrícolas</h1>
+      <div class="text-sm md:text-base font-normal">
+        <p>Somos pioneros en implementar una solución SMART
+          <br> y amigable para los agricultores a través de un
+          <br> producto físico y digital.
+        </p>
+      </div>
+    </div>
+  </div>
+</ContentSection>
+

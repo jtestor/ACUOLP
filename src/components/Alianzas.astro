@@ -1,0 +1,57 @@
+---
+import CompatibilityList from "~/components/compatibility-list.astro";
+import ContentSection from "~/components/content-section.astro";
+import type { CompatibilityItem } from "~/types";
+import { FaMicrosoft } from "react-icons/fa"; // Importa el ícono de Microsoft
+
+// Constantes de imágenes
+const image0Ohm = "/assets/0ohm.png";
+const imageSutil = "/assets/sutil.jpeg";
+const imageApta = "/assets/apta.jpeg";
+const imageMicrosoft="/assets/Microsoft.png"
+const imageUAI = "/assets/uai-logo.png";
+const imageLaConstancia = "/assets/laconstancia.jpg";
+
+// Datos de alianzas
+const frameworks: Array<CompatibilityItem> = [
+  {
+    title: "Empresas 0ohm",
+    image: image0Ohm,
+    url: "https://www.0ohm.cl",
+  },
+  {
+    title: "Empresas Sutil",
+    image: imageSutil,
+    url: "https://www.empresassutil.cl",
+  },
+  {
+    title: "Microsoft for Startups",
+    image: imageMicrosoft, // Usa el ícono de Microsoft
+    url: "https://foundershub.startups.microsoft.com",
+  },
+  {
+    title: "Hub APTA",
+    image: imageApta,
+    url: "https://hubapta.com",
+  },
+  {
+    title: "UAI",
+    image: imageUAI,
+    url: "https://www.uai.cl",
+  },
+  {
+    title: "La Constancia",
+    image: imageLaConstancia,
+    url: "",
+  },
+];
+---
+
+<ContentSection title="Compatibility" id="banner">
+  <Fragment slot="lead"></Fragment>
+  <CompatibilityList
+    items={frameworks}
+    title="Nuestras alianzas"
+    url="https://docs.astro.build/core-concepts/framework-components/"
+  />
+</ContentSection>

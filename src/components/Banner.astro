@@ -1,0 +1,67 @@
+---
+import { FaPowerOff, FaLink, FaHandHoldingWater } from "react-icons/fa";
+import { GiStakeHammer } from "react-icons/gi";
+import ContentSection from "~/components/content-section.astro";
+---
+
+<ContentSection 
+  title="" 
+  id="banner" 
+  customClass="relative flex flex-col justify-center items-center p-8"
+>
+  <!-- Título -->
+  <h1 class="w-full text-center text-2xl font-bold text-white mb-8">Solución SMART para tu campo</h1> 
+
+  <!-- Línea Horizontal -->
+  <!-- Hidden on mobile, full width on tablet (md) and up, spaced on large screens -->
+  <div class="absolute hidden md:block left-0 right-0 md:left-24 md:right-24 xl:left-24 xl:right-36 top-[50%] h-0.5 xl:h-0.5 bg-white z-0"></div>
+
+  <!-- Ítems usando Grid para espaciado equidistante -->
+  <div class="relative z-10 grid grid-cols-1 md:grid-cols-4 gap-12 items-center w-full max-w-7xl">
+    
+    <!-- Primer ítem -->
+    <div class="flex flex-col items-center text-center">
+      <div class="flex items-center justify-center w-20 h-20 rounded-full bg-white mb-2">
+        <div class="text-black">
+          <GiStakeHammer size={48} />
+        </div>
+      </div>
+      <p class="font-bold text-white mt-2">Entierra</p>
+      <p class="text-gray-400 text-sm">Instala las estacas.</p>
+    </div>
+
+    <!-- Segundo ítem -->
+    <div class="flex flex-col items-center text-center">
+      <div class="flex items-center justify-center w-20 h-20 rounded-full bg-white mb-2">
+        <div class="text-black">
+          <FaPowerOff size={48} />
+        </div>
+      </div>
+      <p class="font-bold text-white mt-2">Enciende</p>
+      <p class="text-gray-400 text-sm">Activa las estacas.</p>
+    </div>
+
+    <!-- Tercer ítem -->
+    <div class="flex flex-col items-center text-center">
+      <div class="flex items-center justify-center w-20 h-20 rounded-full bg-white mb-2">
+        <div class="text-black">
+          <FaLink size={48} />
+        </div>
+      </div>
+      <p class="font-bold text-white mt-2">Empareja</p>
+      <p class="text-gray-400 text-sm">Sincroniza el controlador.</p>
+    </div>
+
+    <!-- Cuarto ítem -->
+    <div class="flex flex-col items-center text-center xl:mt-1 lg:mt-8">
+      <div class="flex items-center justify-center w-20 h-20 rounded-full bg-white mb-2">
+        <div class="text-black">
+          <FaHandHoldingWater size={48} />
+        </div>
+      </div>
+      <p class="font-bold text-white mt-2">Ahorra</p>
+      <p class="text-gray-400 text-sm">Ahorra 20% de agua en tus riegos.</p>
+    </div>
+
+  </div>
+</ContentSection>

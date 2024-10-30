@@ -1,0 +1,43 @@
+---
+import { string } from 'astro/zod';
+
+export interface Props {
+  id: string;
+  title: string;
+  customClass?: string;
+  style?: string;
+  overlayOpacity?: string; // Optional opacity setting
+  backgroundImage?: string;
+  backgroundColor?: string;
+}
+
+const { title, id, customClass = '', style = '', backgroundImage = '', backgroundColor = '', overlayOpacity = '0.5' } = Astro.props;
+
+const hasBackgroundImage = backgroundImage !== '';
+const hasBackgroundColor = backgroundColor !== '';
+
+const defaultHeightClass = hasBackgroundImage 
+  ? 'min-h-[400px] md:min-h-[500px]' 
+  : 'h-auto'; // Ensuring it's only as tall as the content
+---
+
+<section
+  id={id}
+  class={`relative flex flex-col ${defaultHeightClass} ${customClass}`}
+  style={`${style}`}
+>
+  <!-- Background image layer with opacity -->
+  {hasBackgroundImage && (
+    <div class="absolute inset-0 z-0 bg-cover bg-center" style={`background-image: url(${backgroundImage}); opacity: ${overlayOpacity};`}></div>
+  )}
+
+  <!-- Background color layer (if no image is provided) -->
+  {hasBackgroundColor && !hasBackgroundImage && (
+    <div class="absolute inset-0 z-0" style={`background-color: ${backgroundColor};`}></div>
+  )}
+
+  <!-- Content without background effect -->
+  <div class="relative z-10 flex flex-col">
+    <slot />
+  </div>
+</section>

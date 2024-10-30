@@ -1,0 +1,123 @@
+---
+import ContentSection from "~/components/content-section.astro";
+import { FaRegThumbsUp } from "react-icons/fa";
+import { LuRocket } from "react-icons/lu";
+import { BsGraphUpArrow } from "react-icons/bs";
+import { GiEcology } from "react-icons/gi";
+
+// Ruta de la imagen de fondo
+const background = "/assets/cultivos.jpg";
+---
+
+<ContentSection 
+  id="Beneficios" 
+  title=""
+  customClass="h-full flex bg-cover bg-center bg-no-repeat" 
+  style={`background-image: url(${background});`}
+  overlayOpacity="0.5"
+>
+
+  <div class="flex flex-col justify-center items-center w-full h-full pt-20 pb-10">
+    
+    <!-- Responsive Grid Layout -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 w-full max-w-7xl mx-auto relative">
+      
+      <!-- Container 1 -->
+      <div class="flex flex-col items-center gap-4 text-white px-4 sm:px-8 md:mb:8">
+        <div class="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 bg-teal-950 rounded-full mb-4">
+          <i class="text-white text-2xl sm:text-3xl lg:text-3xl"><LuRocket /></i>
+        </div>
+        <h1 class="text-md sm:text-lg lg:text-lg font-bold mb-2 text-center">Menos costos, más productividad</h1>
+        <p class="text-center text-sm leading-relaxed">Optimiza recursos, reduciendo costos un 20% y aumentando rendimiento agrícola un 25%.</p>
+      </div>
+
+      <!-- Container 2 -->
+      <div class="flex flex-col items-center gap-4 text-white px-4 sm:px-8">
+        <div class="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 bg-teal-950 rounded-full mb-4">
+          <i class="text-white text-2xl sm:text-3xl lg:text-3xl"><FaRegThumbsUp /></i>
+        </div>
+        <h1 class="text-md sm:text-lg lg:text-lg font-bold mb-2 text-center">Facilidad de uso</h1>
+        <p class="text-center text-sm leading-relaxed">Tecnología Plug & Play, accesible para pequeños y medianos agricultores, sin necesidad de conocimientos técnicos.</p>
+      </div>
+
+      <!-- Container 3 -->
+      <div class="flex flex-col items-center gap-4 text-white px-4 sm:px-8">
+        <div class="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 bg-teal-950 rounded-full mb-4">
+          <i class="text-white text-2xl sm:text-3xl lg:text-3xl"><GiEcology /></i>
+        </div>
+        <h1 class="text-md sm:text-lg lg:text-lg font-bold mb-2 text-center">Sostenibilidad</h1>
+        <p class="text-center text-sm leading-relaxed">Reduce el consumo de agua un <span class="font-bold">30%</span> y fertilizantes un <span class="font-bold">20%</span> promoviendo prácticas agrícolas sostenibles.</p>
+      </div>
+
+      <!-- Container 4 (Oculto en móviles, visible en pantallas medianas y grandes) -->
+      <div class="hidden md:flex flex-col items-center gap-4 text-white px-4 sm:px-8">
+        <div class="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-24 lg:h-24 bg-teal-950 rounded-full mb-4">
+          <i class="text-white text-2xl sm:text-3xl lg:text-3xl"><BsGraphUpArrow /></i>
+        </div>
+        <h1 class="text-md sm:text-lg lg:text-lg font-bold mb-2 text-center">Adaptabilidad y mejora continua</h1>
+        <p class="text-center text-sm leading-relaxed">Se adapta a diferentes cultivos y mejora mediante datos aportados por agricultores.</p>
+      </div>
+
+      <!-- Tablet Lines (Cross layout) -->
+      <div class="hidden sm:block lg:hidden absolute inset-0">
+        <div class="relative h-full w-full">
+          <!-- Horizontal and vertical cross lines -->
+          <div class="absolute inset-y-0 left-1/2 transform -translate-x-1/2 w-1 bg-white"></div>
+          <div class="absolute inset-x-0 top-1/2 transform -translate-y-1/2 h-1 bg-white"></div>
+
+          <!-- Center circle -->
+          <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-teal-400 w-4 h-4 rounded-full">
+            <div class="bg-white w-2 h-2 rounded-full absolute inset-0 m-auto"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desktop Lines (Vertical) -->
+      <div class="hidden lg:block absolute inset-0">
+        <div class="relative h-full">
+          <div class="absolute inset-y-0 left-1/4 transform -translate-x-1/2 w-1 bg-white"></div>
+          <div class="absolute inset-y-0 left-1/2 transform -translate-x-1/2 w-1 bg-white"></div>
+          <div class="absolute inset-y-0 left-3/4 transform -translate-x-1/2 w-1 bg-white"></div>
+
+          <!-- Circles -->
+          <div class=" bg-teal-400 w-4 h-4 rounded-full absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2">
+            <div class="bg-white w-2 h-2 rounded-full absolute inset-0 m-auto"></div>
+          </div>
+
+          <div class=" bg-teal-400 w-4 h-4 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div class="bg-white w-2 h-2 rounded-full absolute inset-0 m-auto"></div>
+          </div>
+
+          <div class=" bg-teal-400 w-4 h-4 rounded-full absolute top-1/2 left-3/4 transform -translate-x-1/2 -translate-y-1/2">
+            <div class="bg-white w-2 h-2 rounded-full absolute inset-0 m-auto"></div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</ContentSection>
+
+<style>
+  /* Estilos específicos para iPhone 14 Pro */
+  @media only screen and (max-height: 852px) and (max-width: 390px) {
+    #Beneficios {
+      padding-top: 2rem; /* Ajusta el padding para que el contenido suba un poco más */
+    }
+  }
+
+  /* Estilos específicos para iPhone 14 Pro Max */
+  @media only screen and (max-height: 932px) and (max-width: 430px) {
+    #Beneficios {
+      padding-top: 1.5rem; /* Ajusta el padding para que el contenido suba un poco más */
+    }
+  }
+
+  /* Para sm a md ajustando bien el contenido */
+  @media (min-width: 640px) and (max-width: 767px) {
+    #Beneficios {
+      padding-top: 1rem;
+    }
+  }
+</style>
